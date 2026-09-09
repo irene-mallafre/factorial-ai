@@ -1,0 +1,133 @@
+/* Activity board layout. Typography and surfaces come from f0 utilities; this only adds the
+   column grid and the status dots, using the design system's colour tokens. */
+
+.f0c-activity {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 16px;
+  overflow: auto;
+  padding: 12px 20px 20px;
+}
+
+.f0c-activity-filter {
+  height: 28px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  padding: 0 10px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: hsl(var(--neutral-50));
+  transition: background-color 100ms ease, color 100ms ease;
+}
+.f0c-activity-filter:hover {
+  background: hsl(var(--neutral-5));
+  color: hsl(var(--neutral-100));
+}
+.f0c-activity-filter-on,
+.f0c-activity-filter-on:hover {
+  background: hsl(var(--neutral-10));
+  color: hsl(var(--neutral-100));
+}
+
+.f0c-activity-column {
+  display: flex;
+  flex: 0 0 288px;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.f0c-activity-cards {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 2px;
+  margin: -2px;
+}
+
+.f0c-activity-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: hsl(var(--neutral-solid-40));
+}
+.f0c-activity-dot-running {
+  background: hsl(var(--info-50));
+  animation: f0c-activity-pulse 2s ease-in-out infinite;
+}
+.f0c-activity-dot-needs-you {
+  background: hsl(var(--warning-50));
+}
+.f0c-activity-dot-stalled {
+  background: hsl(var(--critical-50));
+}
+.f0c-activity-dot-done {
+  background: hsl(var(--positive-50));
+}
+
+@keyframes f0c-activity-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .f0c-activity-dot-running {
+    animation: none;
+  }
+}
+
+/* Category tags: one soft tint each. Miscellaneous (anything not connected to the job) also
+   washes the whole card in lavender so it reads apart from work. */
+.f0c-activity-tag {
+  align-self: flex-start;
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+.f0c-activity-tag-people { background: rgba(12, 165, 127, 0.14); color: #1c6f57; }
+.f0c-activity-tag-time { background: rgba(85, 150, 246, 0.16); color: #2f5fa8; }
+.f0c-activity-tag-pay { background: rgba(245, 165, 28, 0.18); color: #8a5a06; }
+.f0c-activity-tag-hiring { background: rgba(229, 25, 67, 0.12); color: #a2213a; }
+.f0c-activity-tag-operations { background: hsl(var(--neutral-10)); color: hsl(var(--neutral-60)); }
+.f0c-activity-tag-misc { background: rgba(161, 173, 229, 0.3); color: #4b5596; }
+.dark .f0c-activity-tag-people { color: #7fd6bd; }
+.dark .f0c-activity-tag-time { color: #9fc0f8; }
+.dark .f0c-activity-tag-pay { color: #f3c774; }
+.dark .f0c-activity-tag-hiring { color: #f3a0b1; }
+.dark .f0c-activity-tag-misc { color: #c9d0f3; }
+
+.f0c-activity-misc {
+  border-color: rgba(161, 173, 229, 0.55);
+  background: linear-gradient(rgba(161, 173, 229, 0.1), rgba(161, 173, 229, 0.1)), hsl(var(--neutral-0));
+}
+.dark .f0c-activity-misc {
+  border-color: rgba(161, 173, 229, 0.4);
+  background: linear-gradient(rgba(161, 173, 229, 0.14), rgba(161, 173, 229, 0.14)), hsl(var(--neutral-0));
+}
+
+/* Filter chips */
+.f0c-activity-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.f0c-activity-filter-misc {
+  margin-left: 4px;
+  border-left: 1px solid hsl(var(--neutral-10));
+  border-radius: 0 6px 6px 0;
+  padding-left: 12px;
+}

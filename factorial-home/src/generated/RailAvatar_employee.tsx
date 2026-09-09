@@ -1,0 +1,11 @@
+export default function RailAvatarEmployee() {
+  return (
+    <div className="relative inline-flex h-fit w-fit">
+      <div className="relative h-fit w-fit">
+        <span data-a11y-color-contrast-ignore="true" className="relative flex shrink-0 items-center justify-center overflow-hidden text-center font-semibold ring-1 ring-inset ring-f1-border-secondary size-6 text-sm rounded-full bg-f1-background-inverse-secondary dark:bg-f1-background-tertiary" role="img" aria-hidden="true" translate="no">
+          <img className="aspect-square h-full w-full object-cover" alt="S" loading="lazy" src="https://i.pravatar.cc/120?u=sara-vidal" />
+        </span>
+      </div>
+    </div>
+  )
+}

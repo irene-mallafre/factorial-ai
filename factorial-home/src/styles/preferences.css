@@ -1,0 +1,93 @@
+/* Preferences screen: switch, status dot and destination options, built on f0's tokens. */
+
+.f0c-switch {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 9999px;
+  background: hsl(var(--neutral-20));
+  padding: 2px;
+  transition: background-color 140ms ease;
+}
+.f0c-switch[data-state='checked'] {
+  background: hsl(var(--selected-50));
+}
+.f0c-switch-thumb {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: hsl(var(--white-100));
+  box-shadow: 0 1px 2px rgba(13, 22, 37, 0.2);
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.f0c-switch[data-state='checked'] .f0c-switch-thumb {
+  transform: translateX(16px);
+}
+
+.f0c-pref-status {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: hsl(var(--neutral-solid-40));
+}
+.f0c-pref-status-on {
+  background: hsl(var(--positive-50));
+}
+
+.f0c-pref-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.f0c-pref-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid hsl(var(--neutral-10));
+  border-radius: 10px;
+  background: hsl(var(--neutral-0));
+  padding: 12px;
+  text-align: left;
+  transition: border-color 100ms ease, background-color 100ms ease;
+}
+.f0c-pref-option:hover:not(:disabled) {
+  background: hsl(var(--neutral-3));
+  border-color: hsl(var(--neutral-30));
+}
+.f0c-pref-option-selected,
+.f0c-pref-option-selected:hover:not(:disabled) {
+  border-color: hsl(var(--selected-50));
+}
+.f0c-pref-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.f0c-pref-radio {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1px solid hsl(var(--neutral-30));
+  border-radius: 9999px;
+  background: hsl(var(--neutral-0));
+}
+.f0c-pref-option-selected .f0c-pref-radio {
+  border-color: hsl(var(--selected-50));
+  background: hsl(var(--selected-50));
+}
+.f0c-pref-option-selected .f0c-pref-radio::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 9999px;
+  background: hsl(var(--white-100));
+}

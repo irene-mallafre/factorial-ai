@@ -1,0 +1,480 @@
+[data-vaul-drawer]{touch-action:none;will-change:transform;transition:transform .5s cubic-bezier(.32, .72, 0, 1);animation-duration:.5s;animation-timing-function:cubic-bezier(0.32,0.72,0,1)}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=bottom][data-state=open]{animation-name:slideFromBottom}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=bottom][data-state=closed]{animation-name:slideToBottom}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=top][data-state=open]{animation-name:slideFromTop}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=top][data-state=closed]{animation-name:slideToTop}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=left][data-state=open]{animation-name:slideFromLeft}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=left][data-state=closed]{animation-name:slideToLeft}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=right][data-state=open]{animation-name:slideFromRight}[data-vaul-drawer][data-vaul-snap-points=false][data-vaul-drawer-direction=right][data-state=closed]{animation-name:slideToRight}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=bottom]{transform:translate3d(0,var(--initial-transform,100%),0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=top]{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=left]{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}[data-vaul-drawer][data-vaul-snap-points=true][data-vaul-drawer-direction=right]{transform:translate3d(var(--initial-transform,100%),0,0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=top]{transform:translate3d(0,var(--snap-point-height,0),0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=bottom]{transform:translate3d(0,var(--snap-point-height,0),0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=left]{transform:translate3d(var(--snap-point-height,0),0,0)}[data-vaul-drawer][data-vaul-delayed-snap-points=true][data-vaul-drawer-direction=right]{transform:translate3d(var(--snap-point-height,0),0,0)}[data-vaul-overlay][data-vaul-snap-points=false]{animation-duration:.5s;animation-timing-function:cubic-bezier(0.32,0.72,0,1)}[data-vaul-overlay][data-vaul-snap-points=false][data-state=open]{animation-name:fadeIn}[data-vaul-overlay][data-state=closed]{animation-name:fadeOut}[data-vaul-animate=false]{animation:none!important}[data-vaul-overlay][data-vaul-snap-points=true]{opacity:0;transition:opacity .5s cubic-bezier(.32, .72, 0, 1)}[data-vaul-overlay][data-vaul-snap-points=true]{opacity:1}[data-vaul-drawer]:not([data-vaul-custom-container=true])::after{content:'';position:absolute;background:inherit;background-color:inherit}[data-vaul-drawer][data-vaul-drawer-direction=top]::after{top:initial;bottom:100%;left:0;right:0;height:200%}[data-vaul-drawer][data-vaul-drawer-direction=bottom]::after{top:100%;bottom:initial;left:0;right:0;height:200%}[data-vaul-drawer][data-vaul-drawer-direction=left]::after{left:initial;right:100%;top:0;bottom:0;width:200%}[data-vaul-drawer][data-vaul-drawer-direction=right]::after{left:100%;right:initial;top:0;bottom:0;width:200%}[data-vaul-overlay][data-vaul-snap-points=true]:not([data-vaul-snap-points-overlay=true]):not(
+[data-state=closed]
+){opacity:0}[data-vaul-overlay][data-vaul-snap-points-overlay=true]{opacity:1}[data-vaul-handle]{display:block;position:relative;opacity:.7;background:#e2e2e4;margin-left:auto;margin-right:auto;height:5px;width:32px;border-radius:1rem;touch-action:pan-y}[data-vaul-handle]:active,[data-vaul-handle]:hover{opacity:1}[data-vaul-handle-hitarea]{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,2.75rem);height:max(100%,2.75rem);touch-action:inherit}@media (hover:hover) and (pointer:fine){[data-vaul-drawer]{user-select:none}}@media (pointer:fine){[data-vaul-handle-hitarea]{width:100%;height:100%}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeOut{to{opacity:0}}@keyframes slideFromBottom{from{transform:translate3d(0,var(--initial-transform,100%),0)}to{transform:translate3d(0,0,0)}}@keyframes slideToBottom{to{transform:translate3d(0,var(--initial-transform,100%),0)}}@keyframes slideFromTop{from{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}to{transform:translate3d(0,0,0)}}@keyframes slideToTop{to{transform:translate3d(0,calc(var(--initial-transform,100%) * -1),0)}}@keyframes slideFromLeft{from{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}to{transform:translate3d(0,0,0)}}@keyframes slideToLeft{to{transform:translate3d(calc(var(--initial-transform,100%) * -1),0,0)}}@keyframes slideFromRight{from{transform:translate3d(var(--initial-transform,100%),0,0)}to{transform:translate3d(0,0,0)}}@keyframes slideToRight{to{transform:translate3d(var(--initial-transform,100%),0,0)}}
+
+  main#content { padding: 0 !important; background: #FCFCFC; }
+  /* The ApplicationFrame slot reserves a fixed 240px column (plus a 12px
+     gutter) for the classic sidebar — the rail + panel nav sizes itself,
+     so the wrapper follows its content instead. The wrapper has no
+     stable selector; :has() on the nav root is the only hook. */
+  div:has(> [data-home-nav]) { width: auto !important; padding-left: 0 !important; }
+  /* Rail, panel and canvas are ONE flat surface (#FCFCFC, verified pixel
+     by pixel against the Figma render, per Oskar) — the nav carries no
+     colour of its own; only a hairline separates the columns. The divider
+     is an inset shadow, not a border: a border would shrink the fixed
+     content boxes and force 1px horizontal scrollbars in their bodies.
+     rgba(5,38,87,0.06) over #FCFCFC resolves to the design's #EDEFF2. */
+  [data-home-rail],
+  [data-home-panel] {
+    background: #FCFCFC;
+    box-shadow: inset -1px 0 0 rgba(5, 38, 87, 0.06);
+  }
+  /* The split conversation panel is another column of the same surface,
+     so it gets the same hairline — on its LEADING edge, since the canvas
+     is what it sits beside (the frame draws it as a border-right on the
+     canvas; an inset shadow here keeps the fixed content boxes from
+     shrinking, the same reason the nav columns use one). */
+  [data-one-panel] {
+    background: #FCFCFC;
+    box-shadow: inset 1px 0 0 rgba(5, 38, 87, 0.06);
+  }
+  /* Dark: the light values above are experimental customs with no dark
+     pair, so rebuild the same relationships from f0's dark tokens — one
+     surface again (chrome base neutral-0 lifted by the --page overlay,
+     the identical formula the canvas uses), dividers to white-alpha. */
+  .dark main#content,
+  .dark [data-home-rail],
+  .dark [data-home-panel],
+  .dark [data-one-panel] {
+    background: linear-gradient(hsl(var(--page)), hsl(var(--page))), hsl(var(--neutral-0));
+  }
+  .dark [data-home-rail],
+  .dark [data-home-panel] {
+    box-shadow: inset -1px 0 0 hsl(var(--neutral-10));
+  }
+  .dark [data-one-panel] {
+    box-shadow: inset 1px 0 0 hsl(var(--neutral-10));
+  }
+  /* Same thin theme-aware scrollbar as the canvas, no mask. */
+  .home-panel-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+  /* One composer (Figma 2639:45460): f0's F0AiChatTextArea with Oskar's
+     tweaks — 16px radius instead of f0's rounded-lg (14px), and 16px of
+     text padding instead of 12px. The component takes no className, so
+     these are scoped to the prototype's wrapper. The text layers all
+     stack in ONE grid cell (textarea + invisible autosize mirror +
+     mention highlight + placeholder), each carrying its own padding, so
+     every layer has to move together or the placeholder drifts off the
+     caret. The action bar already matches the design's 12px. */
+  [data-one-composer] form { border-radius: 16px; }
+  /* Border stays f0's own token in every state — no gradient ring (it read
+     as far too loud, and insetting f0's opaque ::before panel to expose it
+     left the inner corner at a different radius than the outer one). Only
+     hover shifts it a step darker; focus is the DEFAULT colour, since f0
+     itself lightens it to background-tertiary, which reads as the border
+     dropping out. Colour change gets plain ease, and stays short: hovering
+     the composer is a many-times-a-day interaction (Emil).
+     The !important flags are needed throughout this block: f0 styles the
+     form with Tailwind utilities that win over these selectors in
+     practice, and the component exposes no className to do it properly. */
+  [data-one-composer] form { transition: border-color 140ms ease; }
+  /* Gated to fine pointers: a touch tap fires :hover and would leave the
+     composer stuck a step darker until the next tap elsewhere. */
+  @media (hover: hover) and (pointer: fine) {
+    [data-one-composer] form:hover {
+      border-color: hsl(var(--neutral-40)) !important;
+    }
+  }
+  [data-one-composer] form:has(textarea:focus) {
+    border-color: hsl(var(--neutral-30)) !important;
+  }
+  /* Focus glow: f0's own conic gradient, restopped to the earlier bar's
+     palette (orange → red → lavender) at lower alpha and a wider blur so
+     it reads as a soft halo rather than a coloured edge, and pushed
+     outside the border. Orbits on our own angle so we control the pace. */
+  [data-one-composer] form::after {
+    background: conic-gradient(
+      from var(--f0c-one-angle),
+      rgba(229, 86, 25, 0.32),
+      rgba(229, 25, 67, 0.32),
+      rgba(161, 173, 229, 0.48),
+      rgba(229, 86, 25, 0.32)
+    );
+    inset: -4px !important;
+    filter: blur(14px) !important;
+  }
+  /* Orbit ONLY while the glow is on screen. f0 keeps this ::after at
+     opacity 0 until focus, so an always-on animation re-resolved the
+     conic gradient and re-blurred the full composer box every frame for
+     something nobody could see — and --f0c-one-angle is a registered
+     custom property, so it invalidates paint rather than compositing.
+     The reduced-motion override must carry the same :has() selector or
+     it loses on specificity and stops applying. */
+  [data-one-composer] form:has(textarea:focus)::after {
+    animation: f0c-one-orbit 7s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-one-composer] form:has(textarea:focus)::after { animation: none; }
+  }
+  [data-one-composer] div:has(> textarea[name="one-ai-input"]) > * {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  [data-one-composer] textarea[name="one-ai-input"] { margin-top: 16px; }
+  /* The autosize mirror sizes the cell — its margins set the box height. */
+  [data-one-composer] div:has(> textarea[name="one-ai-input"]) > div {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  /* The placeholder positions with padding, not margin. Its copy comes
+     from i18n whenever there is a SINGLE placeholder — the chat context's
+     placeholder list only feeds the typewriter, which needs two or more
+     and animates. Swapping the glyphs here keeps the design's static line
+     without an app-wide i18n override or a fake second placeholder. */
+  [data-one-composer] div:has(> textarea[name="one-ai-input"]) > p {
+    padding-top: 16px;
+    font-size: 0;
+  }
+  [data-one-composer] div:has(> textarea[name="one-ai-input"]) > p::before {
+    /* Overridable per instance: the Agents brief passes its own copy in
+       through --f0c-one-placeholder (see OnePromptBar). */
+    content: var(--f0c-one-placeholder, "How can I help you today?");
+    font-size: 14px;
+  }
+  /* ChatSpinner's own animations, copied from f0's
+     sds/ai/F0ActionItem/styles.css. They are NOT in f0-react's dist —
+     the reworked spinner lives on a branch that has not shipped — so the
+     local ChatSpinner would otherwise render with no entrance and no
+     breath. (shine-text DOES ship, in F0AiChat.css, which is why the
+     "Thinking..." label already shimmers.) Keep in step with that file.
+     No backticks in here: the whole block is a template literal. */
+  @keyframes globe-spin-enter {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+      /* Size-relative — set by the component. A flat px blur reads
+         completely differently at 20px and at 120px. */
+      filter: blur(var(--globe-spin-blur, 1px));
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+  }
+  @keyframes globe-spin-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  /* Subtle "thinking" breath, on the spin's own period so the two
+     rhythms stay in phase. ~3.5% so it reads as life, not noise. */
+  @keyframes globe-spin-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
+  }
+  /* Both in ONE class because the animation shorthand resets every
+     animation-* property: two separate classes would have the second
+     wipe out the first. */
+  .globe-spin-anim {
+    animation:
+      globe-spin-enter 0.2s cubic-bezier(0.23, 1, 0.32, 1) both,
+      globe-spin-breathe var(--globe-spin-cycle, 2300ms) ease-in-out 0.2s infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .globe-spin-anim {
+      animation: globe-spin-fade 0.2s ease both;
+    }
+  }
+  /* The ONE glow behind the clarifying panel (Figma 2732:462941): a
+     blurred gradient sibling painted BEFORE the card, so only the ~4px
+     spilling past the border shows. Real CSS rather than Tailwind —
+     arbitrary blur-[4px] and multi-stop from-/via-/to- utilities are
+     exactly the kind this build drops silently. Left-to-right the frame
+     reads orange → red → lavender (its gradient runs "to left"). */
+  .f0c-clarify-glow {
+    position: absolute;
+    inset: -0.5px;
+    border-radius: 12px;
+    filter: blur(4px);
+    opacity: 0.8;
+    pointer-events: none;
+    background: linear-gradient(
+      to left,
+      rgba(161, 173, 229, 0.7),
+      rgba(229, 25, 67, 0.5),
+      rgba(229, 86, 25, 0.5)
+    );
+  }
+  /* Clock in reads as ACTIVE by tinting its glyph viridian rather than by
+     holding the button pressed (per Oskar). f0's ghost variant paints the
+     icon through a [&_svg:not([data-has-color])]:text-f1-icon utility,
+     which this selector matches in specificity — and this block is
+     injected after Tailwind's sheet, so it wins. --selected-60 IS
+     viridian: core's palette defines viridian.60 as the same 184 92% 28%.
+     (No backticks in here — this whole block is a template literal.) */
+  [data-home-clockin-button][data-open] svg {
+    color: hsl(var(--selected-60));
+  }
+  /* Hide the composer FAB — its actions (theme toggle, back to catalog)
+     live in the sidebar's user menu on this prototype. */
+  div:has(> div > [aria-label="Open f0compose controls"]) { display: none; }
+  /* ONE entrance for every widget: a short lift and fade — the
+     "stacking" move Oskar picked out as the right level of subtlety. The
+     old lateral slide (a full column width of travel) is gone; with close
+     dissolving in place, all widget motion is one quiet family. */
+  /* Chat message tints (Figma 2707:406513). Each speaker carries an
+     "R G B" triple on --f0c-author; the name uses it at full strength and
+     the bubble at 6%, so one value drives both. The Figma frame paints
+     these as raw fills with no token behind them — see CHAT_AUTHORS.
+     Alpha rather than a baked colour so the wash composites over whatever
+     the panel is sitting on, which is what makes dark mode work. */
+  .f0c-chat-author { color: rgb(var(--f0c-author)); }
+  .f0c-chat-bubble { background-color: rgb(var(--f0c-author) / 0.04); }
+  /* On dark the saturated tints go muddy against the panel — lift them
+     toward white, keeping each speaker distinguishable. */
+  .dark .f0c-chat-author {
+    color: color-mix(in srgb, rgb(var(--f0c-author)) 45%, white);
+  }
+  .dark .f0c-chat-bubble {
+    background-color: rgb(var(--f0c-author) / 0.16);
+  }
+
+  @keyframes f0c-window-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  section[data-home-window] {
+    animation: f0c-window-rise 0.22s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  /* Reduced motion keeps the fade, drops the travel (Emil: gentler, not
+     zero) — the panel still announces itself instead of materialising in
+     the same frame the canvas reflows around it. */
+  @keyframes f0c-window-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    section[data-home-window] {
+      animation: f0c-window-fade-in 0.12s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+  }
+  /* The overlaying column carries NO ground and NO shadow of its own
+     (Oskar, 2026-09-04). It used to paint #FCFCFC plus a -12px edge
+     shadow, on the theory that the p-2 gutters between panels would
+     otherwise let content show through — but that is precisely what
+     should happen: over a conversation the opaque slab clipped the rows
+     behind it mid-word, and the shadow made the whole column read as one
+     sheet laid across the chat.
+     What floats is the WIDGET. Every panel already carries its own
+     surface and shadow in WindowStack's CARD_CLASS, which is exactly how
+     the Communities panel reads. The class is kept rather than deleted
+     because WindowsColumn still hangs data-window-stack off it and the
+     dark theme may yet want a ground here. */
+  /* The canvas ground, for anything that must be opaque over it — the
+     calendar's sticky day header would otherwise need white, which the
+     frame does not use. Same value as the overlay below. */
+  .f0c-canvas-surface { background: #FCFCFC; }
+  .dark .f0c-canvas-surface {
+    background: linear-gradient(hsl(var(--page)), hsl(var(--page))), hsl(var(--neutral-0));
+  }
+  /* The People table's header is STICKY, so it needs an opaque ground or
+     rows scroll through it — but f0 paints it bg-f1-background, i.e.
+     white, and this canvas is #FCFCFC (Oskar: it should not read as a
+     white band). Same problem and same answer as the calendar's sticky
+     day header above: paint it the CANVAS surface, so it is opaque
+     without being a different colour from the page. This block is
+     injected after Tailwind's sheet and the selector outweighs a single
+     utility class, so it wins. */
+  main#content thead th { background: #FCFCFC; }
+  .dark main#content thead th {
+    background: linear-gradient(hsl(var(--page)), hsl(var(--page))), hsl(var(--neutral-0));
+  }
+  .f0c-window-overlay {
+    background: transparent;
+  }
+  /* Thinnest scrollbar available, hidden until you interact with the window. */
+  .home-window-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  /* Conversation content fades out as it slides under the pinned ONE bar.
+     Scrollbars use f0's --scrollbar-* vars, which flip with the theme. */
+  .home-canvas-scroll {
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+    mask-image: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+    transition: -webkit-mask-image 150ms ease, mask-image 150ms ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+  /* The same fade the composer end has, at the TOP once you have
+     actually scrolled (Oskar). Gated on the data-scrolled attribute — which
+     ConversationView's existing scroll listener sets — because the bottom
+     fade can be permanent (the composer is always there) while a
+     permanent top one would sit on the first turn at rest. 32px against
+     the bottom's 40: there is less to hide up here, and the navbar edge
+     is right above it. */
+  .home-canvas-scroll[data-scrolled] {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 32px, black calc(100% - 40px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, black 32px, black calc(100% - 40px), transparent 100%);
+  }
+  section[data-home-window]:hover .home-window-scroll {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+  /* Needs-you cards stack in on load. Home is seen dozens of times a
+     day, so the entrance is drastically reduced (Emil framework): tiny
+     4px offset, 200ms, strong ease-out, tight 30ms stagger. */
+  @keyframes f0c-card-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  .f0c-card-in { animation: f0c-card-in 0.2s cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  /* One resolving a row in place. Each reasoning step REPLACES the last,
+     so the change has to be marked — a line silently becoming a different
+     line is easy to miss at a glance. Same 3-4px/200ms/curve as the card
+     entrance above, so the row keeps one motion vocabulary. */
+  @keyframes f0c-step-in {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: none; }
+  }
+  .f0c-step-in { animation: f0c-step-in 0.2s cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  /* The check landing is the one beat worth a little weight. 0.8 and
+     never 0: nothing in the real world appears from nothing (Emil). */
+  @keyframes f0c-check-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: none; }
+  }
+  .f0c-check-in { animation: f0c-check-in 0.2s cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  /* A cleared row LEAVES by collapsing its own height and the gap it
+     owns, so the rows below slide up instead of teleporting when it
+     unmounts. 160ms against the entrance's 200ms — exit faster than
+     enter, because the user is waiting on the system here rather than
+     deciding (Emil). The gap lives on the inner element on purpose: a
+     parent flex gap-2 would survive the collapse and leave an 8px hole
+     behind, so each row carries its own spacing and takes it with it. */
+  /* One's blank-state headline (Figma 2756:475075). The three stops are
+     the SAME brand palette as the composer's focus glow above — lavender,
+     ONE red, ONE orange — which is what the prototype uses wherever the
+     brand speaks for itself. Fixed in both themes by design, like every
+     other ONE gradient here, which is also why it lives in this block
+     rather than as utilities: they are raw brand colours with no f1
+     token, and the prototype checker is right to reject those in a
+     className. */
+  .f0c-one-headline {
+    background-image: linear-gradient(to left, #a1ade5 18%, rgba(229, 25, 67, 0.7) 50%, rgba(229, 86, 25, 0.7) 83%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .f0c-row-slot {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .f0c-row-slot[data-exiting] { grid-template-rows: 0fr; opacity: 0; }
+  /* Reduced motion keeps the OPACITY — it is what tells you the row has
+     gone, and Emil's rule is fewer and gentler, not none — and drops the
+     movement: no collapse, no offsets, no scale. */
+  @media (prefers-reduced-motion: reduce) {
+    .f0c-step-in, .f0c-check-in, .f0c-card-in { animation: none; }
+    .f0c-row-slot { transition: opacity 160ms ease; }
+    .f0c-row-slot[data-exiting] { grid-template-rows: 1fr; }
+  }
+  /* The ONE gradient orbits the composer's focus glow. Constant
+     decorative motion → linear (Emil), slow enough to be felt, not
+     watched. Animating the angle on the pseudo-element itself is
+     deliberate: the property is registered as non-inheriting, so a
+     ::after would otherwise fall back to the initial 0deg and sit still. */
+  @property --f0c-one-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes f0c-one-orbit {
+    to { --f0c-one-angle: 360deg; }
+  }
+  /* Popovers scale in from their trigger corner; modals from center.
+     Never from scale(0) — 0.97 keeps a visible shape (Emil). */
+  @keyframes f0c-pop-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .f0c-popover { animation: f0c-pop-in 0.15s cubic-bezier(0.23, 1, 0.32, 1); }
+  /* Centered modals bake the -50% translate INTO the keyframes: a plain
+     scale animation would override the translate utilities mid-flight and
+     the dialog would flash off-center before snapping into place. */
+  @keyframes f0c-modal-in {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.97); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  .f0c-modal { animation: f0c-modal-in 0.2s cubic-bezier(0.23, 1, 0.32, 1); transform-origin: center; }
+  /* Scrim behind modals — f0's dialog overlay token, faded in. */
+  @keyframes f0c-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  /* Matches .f0c-modal's duration and curve — the scrim and its dialog
+     are one event, and the built-in ease-out is too weak to pair with
+     the custom curve every other keyframe here uses. */
+  .f0c-overlay { animation: f0c-overlay-in 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+  /* Swapping which conversation the Comms panel shows. Only ONE chat is
+     open at a time and its React slot is stable, so the CARD never moves
+     — the contents change underneath it. A short fade is therefore the
+     honest cue: nothing travelled, something was replaced. Reduced motion
+     keeps it, since a fade is already the gentle option. */
+  .f0c-swap-in { animation: f0c-overlay-in 0.14s cubic-bezier(0.23, 1, 0.32, 1); }
+  /* Timing functions as REAL CSS. Arbitrary "ease-[cubic-bezier(...)]"
+     utilities emit NOTHING in f0compose's utilities-only Tailwind pass —
+     Tailwind reports them as ambiguous and drops them, so anything using
+     one silently falls back to the default ease-in-out. Named durations
+     (duration-100/150/200) DO work; arbitrary ones (duration-[140ms]) do
+     not. These classes are the supported way to reach a custom curve.
+     Injected after Tailwind's sheet, so a single class is enough to win. */
+  .f0c-ease-out { transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+  .f0c-ease-hover { transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); }
+  /* Pressable feedback for bespoke (non-F0Button) buttons. The colour
+     pair lives HERE rather than as a transition-colors utility on each
+     row: this is a shorthand, so it would silently drop whatever the
+     utility set. Press → 160ms ease-out (button-press band); hover tint →
+     100ms plain ease, since these rows are hovered many times a day. */
+  .f0c-pressable {
+    transition:
+      transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 100ms ease,
+      color 100ms ease;
+  }
+  .f0c-pressable:active { transform: scale(0.97); }
+  /* Pulse avatar intro, mirroring f0's F0AvatarPulse: the waving hand
+     pops in and rocks, then the avatar + reaction badge follow.
+     DRASTICALLY REDUCED (2026-08-30): this used to open at scale(0.5) on
+     a 1.56 back-out overshoot over 450ms, rock twice, and land the badge
+     at ~1850ms. Home is seen dozens of times a day, so the whole thing
+     now speaks the same language as the Needs-you cards beside it —
+     0.97 start (never from near-zero), the shared ease-out curve, and
+     every stage under the 300ms ceiling. */
+  @keyframes f0c-pulse-pop {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes f0c-wave-rock {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(20deg); }
+  }
+  .f0c-pulse-wave { animation: f0c-pulse-pop 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+  .f0c-pulse-hand {
+    display: inline-block;
+    transform-origin: 60% 60%;
+    animation: f0c-wave-rock 0.45s ease-in-out 1;
+  }
+  .f0c-pulse-avatar { animation: f0c-pulse-pop 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+  .f0c-pulse-badge { animation: f0c-pulse-pop 0.15s cubic-bezier(0.23, 1, 0.32, 1) 0.12s backwards; }
+  /* ---- Reduced motion, consolidated ----
+     Every remaining prototype animation drops its movement and keeps the
+     opacity cue that explains what appeared. f0c-overlay-in is the
+     opacity-only keyframe the rest borrow. */
+  @keyframes f0c-modal-fade-in {
+    from { opacity: 0; transform: translate(-50%, -50%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .f0c-card-in { animation-name: f0c-overlay-in; }
+    .f0c-popover { animation-name: f0c-overlay-in; }
+    .f0c-modal { animation-name: f0c-modal-fade-in; }
+    .f0c-pressable { transition: none; }
+    .f0c-pressable:active { transform: none; }
+    .f0c-pulse-wave, .f0c-pulse-avatar, .f0c-pulse-badge {
+      animation: f0c-overlay-in 0.15s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+    }
+    .f0c-pulse-hand { animation: none; }
+  }

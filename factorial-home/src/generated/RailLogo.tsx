@@ -1,0 +1,11 @@
+export default function RailLogo() {
+  return (
+    <div className="relative inline-flex h-fit w-fit">
+      <div className="relative h-fit w-fit">
+        <span data-a11y-color-contrast-ignore="true" className="relative flex shrink-0 items-center justify-center overflow-hidden text-center font-semibold ring-1 ring-inset ring-f1-border-secondary size-6 rounded-sm text-sm bg-f1-background-inverse-secondary dark:bg-f1-background-tertiary" role="img" aria-hidden="true" translate="no">
+          <img className="aspect-square h-full w-full object-cover" alt="F" loading="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAEpklEQVR4nOyYXUxcRRTHz8xcwPKxIJQCpbAQPwq1pC1pCbaWCgZMiaUJrRGiwYiNhGhj1MSXojExNMRq5El8MIYm1qIBq4aHtliwilYpVRvaQhvcStlt2d3yUaBb2L0zY2aXguxe5i7bEnnY/8Peyz1z5vzu3JkzZ1D4lgpYTsL/N4C3gkB6CgLpKQikp2UHpATsydKSeO56vtbI1yRwQzgAoAkHstjRlQF05gI2WQLrFi06UxNMd26l5UVgTJI1M9tI00nS2gkqXUIglmFUD1RC+uq5RyPjyGRBYxMAwKMjefpqWBkzZx20KgcbcU//kgCpFcXs5d1A3NNuaJh800HausA+6t0u1kALc2hpASTHiz85x0dOKJ+23Gcg9bVnWVmRuHOpuLFVOXJc51sQTMuKaOUuCAsVa+dYh/LRl/4EIu8lb9CnqShmLz4D7g+kvPoB6TgHjOv4cI57+tHpP9j2TRCxgmemc4Xgc326sfSXPVtrFF/KQ7P/EP7brOsy1/vAUGh1Hdy4Kfp5oZhlPXzPQASrNZVi3jhV5Y2P8cCQ/zQzso4ob9bD1DRgpNa8BCE6iUYHiO7c6llT+HDrosZmXoxBK/7sO3GXvIqW5Mkb6/CKfONeU2IWazbYkc325PNHUgEB6jfj738SS497zzDl61POkjxITaTlRaSlXUYvsXFjkif74ZYOjTVFsOv9KlpbzbMzICocIsP5xkfpu/tch/ZrfBfGSLObIzGOZaYFCERz18+83w+/+1rV6r08f7PGa+RmuV5/zvc5OXXWM3Jsm2xdS0cowyguI7fAPuZti4tme/IXdNyVB4lx3k9vTcKNYWENeIT4mlUidZqu+5ro41my9UKw+oTGMCD3jstTEgMEgqgI8evep7xZ42NkjgDzdrRZIE9XhohAgRYWGtWgnCet17jrLPOTAk06xG90pK+FnL0k2z04x12XNB57uhq/HSAQsthFL2ladY/Fjo7/uqBje7dmgcbdORaZbYECXR4Ql/gHIdbgaw2pb4K+fzTcTJaQD7/QeB4V7ilIkKaXP0D4tx7PjVqYo2F2TIVW1ZH6ozBoFQmGc7DYSENz6L5amHD4NqcFmwGJ6YM7z0uCyrYObLougqUksNICaG4HynyCUNLcLlLwA6Ei2J3pBftCiO59StzYR/FFkyyoxCYm71dt4pIcr5YVytpNOWU0ALT0yZlNuumkPKIeUGunGCQAVlnCjLKEJlNSHK0qBc8mfey0vK3eMUilysFG9ZO30Z+XsVfuCQth2RlsXTqkJHBDBCCExm+D2YZ7r+LuPlEAzWrcgbp7+faNSt1hcLrkAf2qqdmWdbi7d7aoYA8ls/Kn2Y5sWBGm7TDlxD//hY+ewFeuzXWS8xjuuqgba5HnsliD663ned4mz3rREefoTI9IATafk8n9AVoZ4/z8Hc2cJNPkHeWVWnzN6mfzxexlN8eUAw1gkeVZbw0NKzUN/tMEdJQOUejuPFHaJvhUPP+VfZQ0tZFvf4RpnVl8z0B3xTLT2LYN4sCVmjBTUUw4kNmGeq/iX87jC7LstyRAS6Rl9/+hIJCegkB6CgLpadkB/RsAAP//8+S2HQt+SE8AAAAASUVORK5CYII=" />
+        </span>
+      </div>
+    </div>
+  )
+}
