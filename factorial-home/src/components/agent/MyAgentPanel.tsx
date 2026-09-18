@@ -18,6 +18,11 @@ const SUGGESTIONS = ["Who's out of office this week?", 'Summarise my team headco
 function replyTo(text: string, firstName: string, prefs: Preferences): string {
   const savedTo = `Saved to ${saveLocationLabel(prefs)} › ${prefs.folder}.`
   const t = text.toLowerCase()
+  if (/not accepted their invite|uninvited/.test(t) && /draft|reminder/.test(t)) return 'Draft for the 472 uninvited: "Hi! Your Factorial account is ready. Accept the invite to see your time off, payslips and documents in one place. It takes two minutes." Want me to send it from you, or from People Ops?'
+  if (/not accepted their invite|pending invit/.test(t)) return '4 people have not accepted yet: Ada Lovelace (Engineering, sent 9 days ago), Emma Ruiz (Sales, 6 days), Tomás Vidal (Support, 3 days) and Nadia Kaur (Finance, yesterday). I can nudge the first two today.'
+  if (/contracts? ending soon/.test(t)) return '4 contracts end in the next 60 days: 2 temporary contracts in Barcelona (30 Sep), M. Ruiz\'s probation (14 days) and one internship in Getafe (15 Oct). Renewals are drafted for the first three; the internship needs a decision.'
+  if (/out next week/.test(t)) return 'Next week 7 people are out: Lucía (Tue–Thu), Pablo (Fri), Marta (all week) and four in Support on Monday for the offsite. No team drops below minimum cover.'
+  if (/pending requests|summari[sz]e the pending/.test(t)) return '12 time-off requests are pending, all inside policy and none overlapping within a team. I can approve them in one go.'
   if (/^review (.+?) and summari[sz]e/.test(t)) {
     const tool = /^review (.+?) and summari[sz]e/.exec(t)?.[1] ?? 'this section'
     return /people/.test(tool) ? 'People today: 2,714 employees across 8 teams, 12 joiners this quarter, 3 on probation ending this month. Pending: 4 pending invitations and 3 uninvited profiles. Next step: send the invitations and review the probation ends before Friday.' : `There are no records shown in ${tool.replace(/\b\w/g, (c) => c.toUpperCase())} to summarize yet.`

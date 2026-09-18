@@ -24,9 +24,11 @@ click(q('[data-home-rail] [aria-label="Tools"]')); await sleep(100)
 out.panelTitle = q('[data-home-panel] span')?.textContent
 click(panelBtn('Time off')); await sleep(200)
 out.url = window.location.href
-out.window = { present: !!q('.f0c-tool-window'), title: q('.f0c-tool-window span.truncate')?.textContent, empty: q('.f0c-tool-empty p')?.textContent, askOne: !!q('.f0c-tool-window [aria-label="Ask One"]'), toolsMode: q('#f0-layout')?.className.includes('f0c-tools-mode'), widgets: !!q('[data-window-stack="right"]'), header: !!q('[aria-label="Open widgets menu"]') }
-click(q('.f0c-tool-window [aria-label="Ask One"]')); await sleep(1200)
-out.one = { panel: !!q('[data-one-panel]'), flat: q('[data-one-panel]')?.className.includes('f0c-one-flat'), width: q('[data-one-panel]')?.style.width, title: q('[data-one-panel] span.truncate')?.textContent, expand: !!q('[aria-label="Expand conversation"]'), thread: [...document.querySelectorAll('[data-one-panel] .f0c-agent-thread p')].map((p) => p.textContent.slice(0, 80)), placeholder: q('[data-one-panel] textarea')?.placeholder, footnote: q('[data-one-panel] .f0c-agent-footnote')?.textContent, buttonNow: q('.f0c-tool-window [aria-label="Close One"]') ? 'Close One' : 'Ask One' }
+out.window = { present: !!q('.f0c-tool-window'), title: q('.f0c-tool-window span.truncate')?.textContent, empty: q('.f0c-tool-empty p')?.textContent, askOne: !!q('.f0c-tool-window .f0c-askone-label'), toolsMode: q('#f0-layout')?.className.includes('f0c-tools-mode'), widgets: !!q('[data-window-stack="right"]'), header: !!q('[aria-label="Open widgets menu"]') }
+click(q('.f0c-askone-label')); await sleep(100)
+out.askone = { expanded: q('.f0c-askone')?.className.includes('f0c-askone-open'), input: q('.f0c-askone-input')?.placeholder, title: q('.f0c-askone-menu-title')?.textContent, options: [...document.querySelectorAll('.f0c-askone-option')].map((b) => b.textContent) }
+click(document.querySelectorAll('.f0c-askone-option')[1]); await sleep(1200)
+out.one = { panel: !!q('[data-one-panel]'), flat: q('[data-one-panel]')?.className.includes('f0c-one-flat'), width: q('[data-one-panel]')?.style.width, title: q('[data-one-panel] span.truncate')?.textContent, expand: !!q('[aria-label="Expand conversation"]'), thread: [...document.querySelectorAll('[data-one-panel] .f0c-agent-thread p')].map((p) => p.textContent.slice(0, 80)), placeholder: q('[data-one-panel] textarea')?.placeholder, footnote: q('[data-one-panel] .f0c-agent-footnote')?.textContent, pillCollapsed: !q('.f0c-askone-open') }
 click(panelBtn('People')); await sleep(300)
 out.people = { title: q('.f0c-tool-window span.truncate')?.textContent, table: !!q('.f0c-tool-window .home-canvas-scroll'), active: panelBtn('People')?.className.includes('bg-f1-background-secondary') }
 click(q('[data-home-rail] [aria-label="Home"]')); await sleep(200)

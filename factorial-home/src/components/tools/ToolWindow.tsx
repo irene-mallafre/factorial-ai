@@ -1,8 +1,8 @@
 import { findTool } from '../../data/tools'
 import PeopleView from '../../generated/PeopleView'
 import { Icons } from '../../generated/icons.gen'
-import { askAgent, closeAgentPanel, useAgentPanel } from '../../state/agentPanel'
 import { Button } from '../ui/Button'
+import { AskOne } from './AskOne'
 
 /** Module glyph: the tool's icon in white on Factorial's red blob. */
 function ToolGlyph({ slug }: { slug: string }) {
@@ -32,8 +32,6 @@ function ToolGlyph({ slug }: { slug: string }) {
 export function ToolWindow({ slug }: { slug: string }) {
   const tool = findTool(slug)
   const label = tool?.label ?? 'Tool'
-  const open = useAgentPanel()
-  const review = () => askAgent(`Review ${label} and summarize the relevant data, pending items and next steps.`, `Review ${label.toLowerCase()}`)
   return (
     <div className="f0c-tool-window" role="region" aria-label={label}>
       <div className="flex w-full shrink-0 items-center justify-between p-[14px]">
@@ -45,7 +43,7 @@ export function ToolWindow({ slug }: { slug: string }) {
           <Button variant="ghost" size="md" icon={Icons.ScreenOptions} hideLabel label="Screen options" />
           <Button variant="ghost" size="md" icon={Icons.ScreenSettings} hideLabel label="Screen settings" />
           <span className="ml-2">
-            <Button variant="outline" size="md" icon={Icons.NewConversation} label={open ? 'Close One' : 'Ask One'} onClick={open ? closeAgentPanel : review} />
+            <AskOne slug={slug} label={label} />
           </span>
         </div>
       </div>

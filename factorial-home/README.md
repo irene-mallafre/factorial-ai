@@ -60,12 +60,17 @@ the original.
   "Tools" and every item in its panel opens the tool as a white window
   (`?view=tool:<slug>`) floating on a flat gray layer shared by the rail, the
   panel and the canvas, so tools read as a layer above the workspace. The
-  window has its own header (module glyph, title, options, settings, "Ask One").
-  Ask One opens One flat on the same gray, titled "Review <tool>", with a
-  wider composer ("How can I help you today?") and the "One works within your
-  permissions · Pro" footnote; expand widens it. People shows the Organization
-  table; other tools show an empty state. Leaving Tools via the rail closes the
-  window. Data in `src/data/tools.ts`, UI in `src/components/tools/`.
+  window has its own header (module glyph, title, options, settings) and a
+  round "Ask One" input: idle it is a quiet pill that glows with f0's animated
+  AI conic gradient (the `AiButton` kit) on hover; clicking expands it into an
+  input ("Ask One about this page", red send arrow) with a "Suggested for this
+  view" menu of three prompts written for that tool. The first prompt, typed or
+  picked, opens One flat on the same gray beside the window, titled after the
+  tool, with the composer ("How can I help you today?") and the "One works
+  within your permissions · Pro" footnote; expand widens it. People shows the
+  Organization table; other tools show an empty state. Leaving Tools via the
+  rail closes the window. Data in `src/data/tools.ts`, UI in
+  `src/components/tools/` (`AskOne.tsx`, `ToolWindow.tsx`).
 
 - **Work buddy button** (People screen header): the original's "Ask One" orb is
   replaced by the robot icon with the label "Work buddy" (or the chosen name).
