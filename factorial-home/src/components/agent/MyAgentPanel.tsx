@@ -108,11 +108,11 @@ export function MyAgentPanel({ variant = 'default' }: { variant?: 'default' | 'f
   }
 
   return (
-    <aside data-one-panel="true" className={`relative flex shrink-0 flex-col overflow-hidden ${flat ? 'f0c-one-flat' : ''}`} style={{ width: flat ? (wide ? 'clamp(420px, 55vw, 760px)' : 'clamp(360px, 40vw, 520px)') : AGENT_PANEL_WIDTH }} aria-label="Work buddy">
+    <aside data-one-panel="true" className={`relative flex shrink-0 flex-col overflow-hidden ${flat ? 'f0c-one-flat' : ''}`} style={{ width: flat ? (wide ? 'clamp(420px, 50vw, 680px)' : 'clamp(340px, 34vw, 440px)') : AGENT_PANEL_WIDTH }} aria-label="Work buddy">
       <div className="flex w-full shrink-0 items-center justify-between p-[14px]">
         <span className="flex min-w-0 items-center gap-2">
           {!flat && <BuddyMark size="sm" />}
-          <span className={`truncate font-medium text-f1-foreground ${flat ? 'text-xl' : 'text-base'}`}>{panelTitle ?? (setup.completed ? setup.name : 'Work buddy')}</span>
+          <span className="truncate text-base font-medium text-f1-foreground">{panelTitle ?? (setup.completed ? setup.name : 'Work buddy')}</span>
         </span>
         <div className="flex items-center">
           {flat && <Button variant="ghost" size="md" icon={wide ? Icons.RestoreCommunities : Icons.MaximizeCommunities} hideLabel label={wide ? 'Shrink conversation' : 'Expand conversation'} onClick={() => setWide((w) => !w)} />}
