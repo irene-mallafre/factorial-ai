@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ActivityBoard } from '../components/activity/ActivityBoard'
 import { PreferencesScreen } from '../components/preferences/PreferencesScreen'
+import { ToolWindow } from '../components/tools/ToolWindow'
+import { isToolView, toolSlug } from '../data/tools'
 import { MyAgentPanel } from '../components/agent/MyAgentPanel'
 import { OnboardingFab } from '../components/onboarding/OnboardingFab'
 import { SetupExperience } from '../components/onboarding/SetupExperience'
@@ -94,7 +96,8 @@ export default function HomePage() {
     observer.current = ro
   }, [])
 
-  const isScreen = view === 'calendar' || view === 'people' || view === 'activity' || view === 'preferences'
+  const isTool = isToolView(view)
+  const isScreen = view === 'calendar' || view === 'people' || view === 'activity' || view === 'preferences' || isTool
   const showPromptBar = !isScreen
   // Like the original's conversation panel, the agent panel takes the widgets' place.
   const hideWidgets = view !== null || agentOpen || setupMode
@@ -158,6 +161,10 @@ export default function HomePage() {
                 : { flex: '1 1 0%', minWidth: CANVAS_MIN_WIDTH }
             }
           >
+            {isTool && view ? (
+              <ToolWindow key={view} slug={toolSlug(view)} />
+            ) : (
+              <>
             <div className="flex flex-col">
               <CanvasHeader view={view} openWidgets={widgets.state.open} onToggleWidget={toggleWidget} quiet={setupMode} />
             </div>
@@ -173,6 +180,8 @@ export default function HomePage() {
                 </>
               )}
             </div>
+              </>
+            )}
           </div>
           {!hideWidgets && (
             <>
@@ -204,19 +213,19 @@ export default function HomePage() {
             </>
           )}
         </div>
-        {agentOpen && !setupMode && <MyAgentPanel />}
+        {agentOpen && !setupMode && <MyAgentPanel variant={isTool ? 'flat' : 'default'} />}
       </div>
     )
   }
 
   return (
-    <div id="f0-layout" className={`flex h-screen w-screen flex-col bg-[#F5F6F8] dark:bg-[#0D1625] ${justLive ? 'f0c-reveal' : ''}`}>
+    <div id="f0-layout" className={`flex h-screen w-screen flex-col bg-[#F5F6F8] dark:bg-[#0D1625] ${justLive ? 'f0c-reveal' : ''} ${isTool ? 'f0c-tools-mode' : ''}`}>
       <div className="h-screen w-screen">
         <div className="scrollbar-macos grid h-screen grid-cols-1 grid-rows-[auto_minmax(0,1fr)]">
           <div className="col-[1/-1]"></div>
           <div className="relative isolate flex h-full">
             <Nav view={view} onView={setView} setupMode={setupMode} />
-            {!setupMode && <OnboardingFab />}
+            {!setupMode && !isTool && <OnboardingFab />}
             {justLive && (
               <Toast>
                 <BuddyMark size="sm" />

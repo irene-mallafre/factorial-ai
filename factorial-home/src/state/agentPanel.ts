@@ -14,8 +14,14 @@ let promptId = 0
 export const usePendingPrompt = () => pendingPrompt.use()
 export const clearPendingPrompt = () => pendingPrompt.set(null)
 
+/** Title shown in the panel header for a conversation started from a tool ("Review tickets"). */
+const panelTitle = createStore<string | null>(null)
+export const usePanelTitle = () => panelTitle.use()
+export const clearPanelTitle = () => panelTitle.set(null)
+
 /** Open the panel and hand it a message to send on the user's behalf. */
-export function askAgent(text: string) {
+export function askAgent(text: string, title?: string) {
+  panelTitle.set(title ?? null)
   pendingPrompt.set({ id: ++promptId, text })
   agentPanel.set(true)
 }
@@ -37,6 +43,7 @@ export function openConversation(id: string) {
 
 export function closeAgentPanel() {
   agentPanel.set(false)
+  panelTitle.set(null)
 }
 
 /** Called by the panel when the user starts something new, so no history row shows as active. */

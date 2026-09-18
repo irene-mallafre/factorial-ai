@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Icons } from '../../generated/icons.gen'
 import { CONVERSATION_BY_ID } from '../../data/conversations'
-import { clearPendingPrompt, closeAgentPanel, detachConversation, useActiveConversation, usePendingPrompt } from '../../state/agentPanel'
+import { clearPendingPrompt, closeAgentPanel, detachConversation, useActiveConversation, usePanelTitle, usePendingPrompt } from '../../state/agentPanel'
 import { useAgentSetup, withTone } from '../../state/agentSetup'
 import { PERSON, usePersona } from '../../state/persona'
 import { saveLocationLabel, usePreferences, type Preferences } from '../../state/preferences'
@@ -18,6 +18,10 @@ const SUGGESTIONS = ["Who's out of office this week?", 'Summarise my team headco
 function replyTo(text: string, firstName: string, prefs: Preferences): string {
   const savedTo = `Saved to ${saveLocationLabel(prefs)} › ${prefs.folder}.`
   const t = text.toLowerCase()
+  if (/^review (.+?) and summari[sz]e/.test(t)) {
+    const tool = /^review (.+?) and summari[sz]e/.exec(t)?.[1] ?? 'this section'
+    return /people/.test(tool) ? 'People today: 2,714 employees across 8 teams, 12 joiners this quarter, 3 on probation ending this month. Pending: 4 pending invitations and 3 uninvited profiles. Next step: send the invitations and review the probation ends before Friday.' : `There are no records shown in ${tool.replace(/\b\w/g, (c) => c.toUpperCase())} to summarize yet.`
+  }
   if (/what can .* do in people|what can you do/.test(t)) return 'In People I can look up anyone, tell you who joined or left and when, summarise headcount by team, workplace or contract, draft announcements for a group, and start onboarding or a role change for you to approve. Ask in plain words, e.g. "who is on probation this month?".'
   if (/who joined this quarter/.test(t)) return 'Twelve people joined this quarter: five in Sales, four in Engineering, two in Support and one in Finance. Nine of them are still in onboarding; three have their 30-day check-in this week.'
   if (/summari[sz]e headcount by team|headcount by team/.test(t)) return 'Headcount by team: Engineering 812, Sales 604, Support 388, Operations 341, Product & Design 196, Finance 118, People 97, other 158. Total 2,714, up 85 since last quarter.'
@@ -40,7 +44,10 @@ function replyTo(text: string, firstName: string, prefs: Preferences): string {
 }
 
 /** The work buddy side panel: brand hero, conversation, suggestions and a composer. */
-export function MyAgentPanel() {
+export function MyAgentPanel({ variant = 'default' }: { variant?: 'default' | 'flat' } = {}) {
+  const flat = variant === 'flat'
+  const [wide, setWide] = useState(false)
+  const panelTitle = usePanelTitle()
   const persona = usePersona()
   const prefs = usePreferences()
   const setup = useAgentSetup()
@@ -70,8 +77,10 @@ export function MyAgentPanel() {
   // there would cancel the reply before it arrives.
   const pending = usePendingPrompt()
   const replyTimer = useRef<number | undefined>(undefined)
+  const handledPrompt = useRef<number>(0)
   useEffect(() => {
-    if (!pending) return
+    if (!pending || pending.id === handledPrompt.current) return
+    handledPrompt.current = pending.id
     clearPendingPrompt()
     detachConversation()
     const clean = pending.text.trim()
@@ -99,13 +108,14 @@ export function MyAgentPanel() {
   }
 
   return (
-    <aside data-one-panel="true" className="relative flex shrink-0 flex-col overflow-hidden" style={{ width: AGENT_PANEL_WIDTH }} aria-label="Work buddy">
+    <aside data-one-panel="true" className={`relative flex shrink-0 flex-col overflow-hidden ${flat ? 'f0c-one-flat' : ''}`} style={{ width: flat ? (wide ? 'clamp(420px, 55vw, 760px)' : 'clamp(360px, 40vw, 520px)') : AGENT_PANEL_WIDTH }} aria-label="Work buddy">
       <div className="flex w-full shrink-0 items-center justify-between p-[14px]">
         <span className="flex min-w-0 items-center gap-2">
-          <BuddyMark size="sm" />
-          <span className="truncate text-base font-medium text-f1-foreground">{setup.completed ? setup.name : 'Work buddy'}</span>
+          {!flat && <BuddyMark size="sm" />}
+          <span className={`truncate font-medium text-f1-foreground ${flat ? 'text-xl' : 'text-base'}`}>{panelTitle ?? (setup.completed ? setup.name : 'Work buddy')}</span>
         </span>
         <div className="flex items-center">
+          {flat && <Button variant="ghost" size="md" icon={wide ? Icons.RestoreCommunities : Icons.MaximizeCommunities} hideLabel label={wide ? 'Shrink conversation' : 'Expand conversation'} onClick={() => setWide((w) => !w)} />}
           <Button variant="ghost" size="md" icon={Icons.CloseClockIn} hideLabel label="Close work buddy" onClick={closeAgentPanel} />
         </div>
       </div>
@@ -162,7 +172,7 @@ export function MyAgentPanel() {
               }}
               rows={2}
               aria-label="Ask your work buddy"
-              placeholder={`Ask ${agentName} anything…`}
+              placeholder={flat ? 'How can I help you today?' : `Ask ${agentName} anything…`}
               className="max-h-40 w-full resize-none border-0 bg-transparent p-0 text-base text-f1-foreground outline-none placeholder:text-f1-foreground-tertiary"
             ></textarea>
             <div className="flex items-center justify-between">
@@ -173,7 +183,7 @@ export function MyAgentPanel() {
               </div>
             </div>
           </form>
-          <p className="f0c-agent-footnote">{setup.completed ? setup.name : 'Your work buddy'} can make mistakes. Check important answers.</p>
+          <p className="f0c-agent-footnote">{flat ? <>One works within your permissions. <a className="underline" href="#" onClick={(e) => e.preventDefault()}>See more</a><span className="f0c-one-pro">Pro</span></> : <>{setup.completed ? setup.name : 'Your work buddy'} can make mistakes. Check important answers.</>}</p>
         </div>
       </div>
     </aside>

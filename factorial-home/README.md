@@ -56,6 +56,17 @@ the original.
 
 ## Customisations on top of the original
 
+- **Tools open on top** (branch `feat/opening-one`): the Hub rail item is now
+  "Tools" and every item in its panel opens the tool as a white window
+  (`?view=tool:<slug>`) floating on a flat gray layer shared by the rail, the
+  panel and the canvas, so tools read as a layer above the workspace. The
+  window has its own header (module glyph, title, options, settings, "Ask One").
+  Ask One opens One flat on the same gray, titled "Review <tool>", with a
+  wider composer ("How can I help you today?") and the "One works within your
+  permissions · Pro" footnote; expand widens it. People shows the Organization
+  table; other tools show an empty state. Leaving Tools via the rail closes the
+  window. Data in `src/data/tools.ts`, UI in `src/components/tools/`.
+
 - **Work buddy button** (People screen header): the original's "Ask One" orb is
   replaced by the robot icon with the label "Work buddy" (or the chosen name).
   Like Gemini in Google Meet, a click opens a compact ask box under the button

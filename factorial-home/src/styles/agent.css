@@ -298,3 +298,99 @@
   width: 16px;
   height: 16px;
 }
+
+/* ---- Tools mode: tools open as a white window on top of the gray workspace layer. The nav, the
+   canvas and the One panel share one flat gray so the window reads as a layer above them. */
+.f0c-tools-mode main#content,
+.f0c-tools-mode [data-home-rail],
+.f0c-tools-mode [data-home-panel],
+.f0c-tools-mode [data-one-panel] {
+  background: #f5f6f8;
+  box-shadow: none;
+}
+.dark .f0c-tools-mode main#content,
+.dark .f0c-tools-mode [data-home-rail],
+.dark .f0c-tools-mode [data-home-panel],
+.dark .f0c-tools-mode [data-one-panel] {
+  background: #0d1625;
+}
+.f0c-tool-window {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 8px 8px 8px 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: hsl(var(--neutral-0));
+  box-shadow: 0 1px 2px rgba(13, 22, 37, 0.06), 0 8px 24px -12px rgba(13, 22, 37, 0.12);
+  animation: f0c-window-rise 0.22s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.dark .f0c-tool-window {
+  background: hsl(var(--neutral-0));
+  box-shadow: 0 0 0 1px hsl(var(--neutral-10));
+}
+.f0c-tool-empty {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 160px 24px 40px;
+}
+.f0c-tool-empty-emoji {
+  display: inline-flex;
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: hsl(var(--neutral-3));
+  font-size: 28px;
+  line-height: 1;
+}
+.f0c-one-flat .f0c-agent-bubble-user {
+  border-radius: 16px 16px 4px 16px;
+  padding: 14px 20px;
+  background: hsl(var(--neutral-5));
+  max-width: 78%;
+}
+.f0c-one-flat .f0c-agent-bubble-user p {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.f0c-one-flat .f0c-agent-row .f0c-agent-bubble {
+  background: transparent;
+  padding: 6px 0;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.f0c-one-flat .f0c-agent-row .f0c-buddy-mark {
+  display: none;
+}
+.f0c-one-flat .f0c-agent-chips {
+  display: none;
+}
+.f0c-one-flat .f0c-agent-composer {
+  border-radius: 16px;
+  padding: 16px;
+}
+.f0c-one-flat .f0c-agent-composer textarea {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  min-height: 56px;
+}
+.f0c-one-flat .f0c-agent-footnote {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 0.875rem;
+  color: hsl(var(--neutral-50));
+}
+.f0c-one-pro {
+  margin-left: auto;
+  font-weight: 500;
+  color: hsl(var(--neutral-60));
+}

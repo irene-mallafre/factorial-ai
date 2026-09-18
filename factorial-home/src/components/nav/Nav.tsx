@@ -22,10 +22,10 @@ const RAIL: { id: Section; label: string; icon: IconComponent; motion: string }[
   { id: 'comms', label: 'Comms', icon: Icons.Comms, motion: 'messages' },
   { id: 'inbox', label: 'Inbox', icon: Icons.Inbox, motion: 'inbox' },
   { id: 'cal', label: 'Cal', icon: Icons.Cal, motion: 'calendar' },
-  { id: 'hub', label: 'Hub', icon: Icons.Hub, motion: 'hub' },
+  { id: 'hub', label: 'Tools', icon: Icons.Hub, motion: 'hub' },
 ]
 
-const PANEL_TITLE: Record<Section, string> = { home: 'Home', comms: 'Comms', inbox: 'Inbox', cal: 'Calendar', hub: 'Hub' }
+const PANEL_TITLE: Record<Section, string> = { home: 'Home', comms: 'Comms', inbox: 'Inbox', cal: 'Calendar', hub: 'Tools' }
 
 const initialSection = (): Section => {
   const stored = readLocal(SECTION_KEY)
@@ -69,7 +69,7 @@ export function Nav({ view, onView, setupMode = false }: Props) {
     setOpen(nextOpen)
     persist(s, nextOpen)
     if (s === 'cal') onView('calendar')
-    else if (view === 'calendar') onView(null)
+    else if (view === 'calendar' || (s !== 'hub' && view?.startsWith('tool:'))) onView(null)
   }
   const collapse = () => {
     setOpen(false)
